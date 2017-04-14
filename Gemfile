@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 
 
-
+gem 'simple_form'
 gem 'devise'
 gem 'bootstrap-sass'
 group :development, :test do

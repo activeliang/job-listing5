@@ -5,7 +5,11 @@ class JobsController < ApplicationController
       @jobs = Job.all
     end
     def show
-      @job = Job.find(params[:id])
+      @job = Job.where(:is_hidden => false).order("created_at DESC")
+      if @job.is_hidden
+      flash[:warning] = "This Job already archieved"
+      redirect_to root_path
+    end
     end
     def new
       @job = Job.new
@@ -36,6 +40,6 @@ class JobsController < ApplicationController
     end
 private
     def job_params
-      params.require(:job).permit(:title,:description,:wage_upper_bound,:wage_lower_bound,:contact_email)
+      params.require(:job).permit(:title,:description,:wage_upper_bound,:wage_lower_bound,:contact_email,:is_hidden)
     end
 end

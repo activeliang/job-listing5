@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 
 
-
+gem 'carrierwave'
 gem 'font-awesome-rails'
 gem 'simple_form'
 gem 'devise'

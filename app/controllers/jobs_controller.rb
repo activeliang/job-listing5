@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!, except:[:show, :index]
-
+  before_action :validate_search_key, only: [:search]
     def index
       @jobs = Job.all
     end
@@ -35,12 +35,43 @@ class JobsController < ApplicationController
         end
     end
     def destroy
-      @jobs = Job.find(params[:id])
+      @job = Job.find(params[:id])
       @job.destroy
       redirect_to jobs_path
     end
+    def search
+      if @query_string.present?
+        search_result = Job.published.ransack(@search_criteria).result(:distinct => true)
+        @jobs = search_result.recent.paginate(:page => params[:page], :per_page => 5 )
+      end
+   end
 private
     def job_params
       params.require(:job).permit(:title,:description,:wage_upper_bound,:wage_lower_bound,:contact_email,:is_hidden)
+    end
+    def validate_search_key
+    @query_string = params[:q].gsub(/\\|\'|\/|\?/, "")
+    if params[:q].present?
+      @search_criteria =  {
+        title_or_company_or_city_cont: @query_string
+      }
+    end
+  end
+
+  def search_criteria(query_string)
+    { :title_cont => query_string }
+  end
+  protected
+    def validate_search_key
+      @query_string = params[:q].gsub(/\\|\'|\/|\?/, "")
+      if params[:q].present?
+        @search_criteria =  {
+          title_or_company_or_city_cont: @query_string
+        }
+      end
+    end
+
+    def search_criteria(query_string)
+      { :title_cont => query_string }
     end
 end

@@ -31,7 +31,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 
-
+gem 'ransack'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 gem 'carrierwave'
 gem 'font-awesome-rails'
 gem 'simple_form'

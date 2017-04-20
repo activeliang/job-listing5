@@ -14,9 +14,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li>
-              <%= render :partial => "jobs/search_bar" %>
+                <div class="form-group form-inline search-bar">
+                    <%= render :partial => "jobs/search_bar" %>
+                </div>
             </li>
-          </ul>
+        </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if !current_user %>
               <li><a href="#" data-toggle="modal" data-target="#signup-modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

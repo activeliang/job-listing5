@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JobListing</title>
+    <title>W&W Offer</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="http://demo.sc.chinaz.com//Files/DownLoad/webjs/jiaoben6/css/slider.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]><script src="http://demo.sc.chinaz.com//Files/DownLoad/webjs/jiaoben6/js/html5.js"></script><![endif]-->
+
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container-fluid">
+      <div class="row">
+        <%= render "common/navbar"%>
+        <%= yield %>
+      </div>
+    </div>
+      <%= render "common/footer" %>
   </body>
+
+
 </html>
